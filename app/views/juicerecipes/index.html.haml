@@ -1,0 +1,11 @@
+- @juicerecipe.each_slice(3) do |juicerecipe|
+	.row
+		- juicerecipe.each do |juicerecipe|
+			.col-md-4
+				.juicerecipe
+					.image_wrapper
+						= link_to juicerecipe do
+							= image_tag juicerecipe.image.url(:medium)
+					%h2= link_to juicerecipe.title, juicerecipe
+	
+	
