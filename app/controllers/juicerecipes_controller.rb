@@ -1,5 +1,6 @@
 class JuicerecipesController < ApplicationController
 	before_action :find_juicerecipe, only: [:show, :edit, :update, :destroy]
+	before_action :authenticate_user!, except: [:index, :show]
 
 	def index
 		@juicerecipe = Juicerecipe.all.order("created_at DESC")
@@ -9,11 +10,11 @@ class JuicerecipesController < ApplicationController
 	end
 
 	def new
-		@juicerecipe = Juicerecipe.new
+		@juicerecipe = current_user.juicerecipes.build
 	end
 
 	def create
-		@juicerecipe = Juicerecipe.new(juicerecipe_params)
+		@juicerecipe = current_user.juicerecipes.build(juicerecipe_params)
 
 		if @juicerecipe.save
 			redirect_to @juicerecipe, notice: "Successfully created new juicerecipe"

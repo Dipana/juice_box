@@ -6,6 +6,9 @@
 			#juicerecipe_info
 				%h1= @juicerecipe.title
 				%p.description= @juicerecipe.description
+				%p
+					Submitted by
+					= @juicerecipe.user.email
 
 	.row
 		.col-md-6
@@ -25,8 +28,9 @@
 	.row
 		.col-md-12
 			= link_to "Back", root_path, class: "btn btn-default"
-			= link_to "Edit", edit_juicerecipe_path, class: "btn btn-default"
-			= link_to "Delete", juicerecipe_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
+			- if user_signed_in?
+				= link_to "Edit", edit_juicerecipe_path, class: "btn btn-default"
+				= link_to "Delete", juicerecipe_path, method: :delete, data: {confirm: "Are you sure?" }, class: "btn btn-default"
 
 
 
