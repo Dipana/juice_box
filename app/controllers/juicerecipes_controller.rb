@@ -16,11 +16,9 @@ class JuicerecipesController < ApplicationController
 	def create
 		@juicerecipe = current_user.juicerecipes.build(juicerecipe_params)
 
-		if @juicerecipe.save
-			redirect_to @juicerecipe, notice: "Successfully created new juicerecipe"
-		else
-			render 'new'
-		end
+		@juicerecipe.save1
+ 		@current_juicerecipe  = @pjuicerecipe
+		@juicerecipes = Juicerecipe.all
 	end
 
 	def edit
@@ -44,7 +42,7 @@ class JuicerecipesController < ApplicationController
 	private
 
 	def juicerecipe_params
-		params.require(:juicerecipe).permit(:title, :description, :image, ingredients_attributes: [:id, :name, :_destroy], direction_attributes: [:id, :step, :_destroy])
+		params.require(:juicerecipe).permit(:title, :description, :image, ingredients_attributes: [:id, :name, :_destroy], directions_attributes: [:id, :step, :_destroy])
 	end
 
 	def find_juicerecipe
